@@ -37,24 +37,18 @@
       var filename = Date.now();
       var storageRef = firebase.storage().ref().child('AudioFiles/'+filename);
       var db = firebase.firestore();
-      storageRef.put(file).then(function(snapshot) {
-        console.log('Uploaded a blob or file!');
-      });
-      var docData = {
-        uId: "Hello world!",
-        url: "hi"
+      
+      storageRef.put(file).then(function(snapshot) {  
+        storageRef.getDownloadURL().then(function(url){
+          var docData = {
+        uId: "Hello world!",  //jv
+        url: url.toString()
         };
-      db.collection("AudioFiles").doc().set(docData).then(function(){
-
+        db.collection("AudioFiles").doc().set(docData).then(function(){
+        });
+       
       });
-      // db.collection("AudioFiles").add({
-      //   uId : "user1",
-      //   url : storageRef.child("AudioFiles").child(filename).toString()
-      // }).then(function(docRef){
-
-      // })
-
-    
+      }); 
      };
   </script>
 </body>
