@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hack4People</title>
+</head>
+<body>
+    
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyARu0PdJGmBtxrLadfK8pPJJgz36fSurMM",
+    authDomain: "hack4people-893ae.firebaseapp.com",
+    databaseURL: "https://hack4people-893ae.firebaseio.com",
+    projectId: "hack4people-893ae",
+    storageBucket: "hack4people-893ae.appspot.com",
+    messagingSenderId: "21910484653"
+  };
+  firebase.initializeApp(config);
+</script>
+   <input type="file" id="fileButton"/>
+   <input type="button" value="Submit" onclick="myUpload()"/>
+  
+  <script>
+   
+     var fileButton = document.getElementById("fileButton");
+     fileButton.addEventListener('change', function(e){
+         var file = e.target.files[0];
+         console.log("Hello");
+         storageRef = firebase.storage().ref().child('AudioFiles');
+         console.log("Hello1");
+     });  
+     function myUpload()
+     {
+      console.log("Hello2");
+      storageRef.put(file);
+      console.log("Uploading");
+     };
+  </script>
+</body>
+</html>
