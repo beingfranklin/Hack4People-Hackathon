@@ -28,16 +28,33 @@
   <script>
    
      var fileButton = document.getElementById("fileButton");
-     var storageRef = firebase.storage().ref().child('AudioFiles/'+Date.now());
      var file;
      fileButton.addEventListener('change', function(e){
           file = e.target.files[0];
      });
      function myUpload()
      {
+      var filename = Date.now();
+      var storageRef = firebase.storage().ref().child('AudioFiles/'+filename);
+      var db = firebase.firestore();
       storageRef.put(file).then(function(snapshot) {
         console.log('Uploaded a blob or file!');
       });
+      var docData = {
+        uId: "Hello world!",
+        url: "hi"
+        };
+      db.collection("AudioFiles").doc().set(docData).then(function(){
+
+      });
+      // db.collection("AudioFiles").add({
+      //   uId : "user1",
+      //   url : storageRef.child("AudioFiles").child(filename).toString()
+      // }).then(function(docRef){
+
+      // })
+
+    
      };
   </script>
 </body>
