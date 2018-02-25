@@ -46,15 +46,26 @@
 
 //   firebase.firestore().collection('leaderboard').orderBy('currentLevel', 'desc')
  var id_val;
- var wraphtml1="<center><div class='col-xs-12 col-sm-4'><div class='card'> <a class='img-card' href=''> <img src=''/></a><div class='card-content'> <h4 class='card-title'><a href=''>";
+ var wraphtml1="<center><div class='col-xs-12 col-sm-4'><div class='card'> <a class='img-card' href=''> <img class='imgr' src='prof.jpg'/></a><div class='card-content'> <h4 class='card-title'><a href=''>";
  var wraphtml2="</a></h4><p class=''>"
  var wraphtml3="</p> </div><div class='card-read-more'></div> </div></div></center>";
+
+//  var wraphtml1="<center><div class='col-xs-12 col-sm-4'><div class='card'> <a class='img-card' href=''> <img src='";
+//  var wraphtmlimg="'/></a><div class='card-content'> <h4 class='card-title'><a href=''>";
+//  var wraphtml2="</a></h4><p class=''>"
+//  var wraphtml3="</p> </div><div class='card-read-more'></div> </div></div></center>";
+
+
   var db = firebase.firestore();
   var docRef = db.collection("FarmerItems").get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
         var farmerId=doc.data().farmerId
         var item=doc.data().item
         var qty=doc.data().qty
+
+
+
+     //    $("#name").append(wraphtml1 +imgurl+wraphtmlimg+dessc +  wraphtml3);
 
          $("#name").append(wraphtml1 + farmerId + wraphtml2 + qty+"<br/>"+ item +  wraphtml3);
           $("#id").append(id_val);
@@ -83,6 +94,10 @@
         // });
     </script>
       <style>
-         .card {min-width: 650px;}</style>
+         .card {min-width: 650px;}
+         img, . imgr,.img-card img,.img-card{
+             width: 150px !important;
+             height:150px;
+         }</style>
 </body>
 </html>
