@@ -7,7 +7,6 @@
     <title>Hack4People</title>
 </head>
 <body>
-<script src="audio.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
 <script>
@@ -22,10 +21,9 @@
   };
   firebase.initializeApp(config);
 </script>
-<button value="" onclick="audioStart()">Start</button> 
-<button value="" onclick="audioStop()">Stop</button> 
 
-   <input type="file" accept="audio/*" id="fileButton"/>
+
+   <input type="file" id="fileButton"/>
    <input type="button" value="Submit" onclick="myUpload()"/>
   
   <script>
@@ -38,7 +36,7 @@
      function myUpload()
      {
       var filename = Date.now();
-      var storageRef = firebase.storage().ref().child('AudioFiles/'+filename);
+      var storageRef = firebase.storage().ref().child('Ads/'+filename);
       var db = firebase.firestore();
       
       storageRef.put(file).then(function(snapshot) {  

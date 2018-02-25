@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+        <section class="wrapper">
+                <div class="container-fostrap">
+                    <div>
+                        <h1 class="heading">
+                           Middle Men Library
+                        </h1>
+                    </div>
+                    <div class="content">
+                        <div class="container">
+                            <div class="row">
+                                    <div id="name"></div>
+                                    <div id="id"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+    <div id="name"></div>
+    <div id="id"></div>
+    <script>
+         // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyARu0PdJGmBtxrLadfK8pPJJgz36fSurMM",
+    authDomain: "hack4people-893ae.firebaseapp.com",
+    databaseURL: "https://hack4people-893ae.firebaseio.com",
+    projectId: "hack4people-893ae",
+    storageBucket: "hack4people-893ae.appspot.com",
+    messagingSenderId: "21910484653"
+  };
+  firebase.initializeApp(config);
+
+//   firebase.firestore().collection('leaderboard').orderBy('currentLevel', 'desc')
+ var id_val;
+ var wraphtml1="<center><div class='col-xs-12 col-sm-4'><div class='card'> <a class='img-card' href=''> <img src=''/></a><div class='card-content'> <h4 class='card-title'><a href=''>";
+ var wraphtml2="</a></h4><p class=''>"
+ var wraphtml3="</p> </div><div class='card-read-more'></div> </div></div></center>";
+  var db = firebase.firestore();
+  var docRef = db.collection("MiddleMen").orderBy('name').get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        var name_val=doc.data().uid
+        var mname=doc.data().name
+        var address=doc.data().address
+
+         $("#name").append(wraphtml1 + mname + wraphtml2 + address+"<br/>"+ name_val +  wraphtml3);
+          $("#id").append(id_val);
+    });
+});
+
+             
+  
+        //   var userDataRef = firebase.database().ref('UserData').orderByKey();
+        // userDataRef.once("value").then(function(snapshot) {
+            
+        // querySnapshot.forEach(function(function (doc) {
+        
+        // });      
+        
+        // (childSnapshot) {
+        //   var key = childSnapshot.key;
+        //   var childData = childSnapshot.val();              
+        
+        //   var name_val = childSnapshot.val().Name;
+        //   var id_val = childSnapshot.val().AssignedID;
+        
+    
+        
+        //   });
+        // });
+    </script>
+      <style>
+         .card {min-width: 650px;}</style>
+</body>
+</html>
