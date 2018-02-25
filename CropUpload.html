@@ -36,13 +36,13 @@
      function myUpload()
      {
       var filename = Date.now();
-      var storageRef = firebase.storage().ref().child('Ads/'+filename);
+      var storageRef = firebase.storage().ref().child('FarmersItems/'+filename);
       var db = firebase.firestore();
       
       storageRef.put(file).then(function(snapshot) {  
         storageRef.getDownloadURL().then(function(url){
           var docData = {
-        uId: "Hello world!",  //jv
+        farmer: "Hello world!",  //jv
         url: url.toString()
         };
         db.collection("AudioFiles").doc().set(docData).then(function(){
