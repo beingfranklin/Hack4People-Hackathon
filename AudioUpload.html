@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hack4People</title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase-firestore.js"></script>
+<script src="audio.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyARu0PdJGmBtxrLadfK8pPJJgz36fSurMM",
+    authDomain: "hack4people-893ae.firebaseapp.com",
+    databaseURL: "https://hack4people-893ae.firebaseio.com",
+    projectId: "hack4people-893ae",
+    storageBucket: "hack4people-893ae.appspot.com",
+    messagingSenderId: "21910484653"
+  };
+  firebase.initializeApp(config);
+</script>
+
+   <button id="start">start</button> 
+   <button id="stop">stop</button> 
+   <input type="file" id="fileButton"/>
+   <input type="button" value="Submit" onclick="myUpload()"/>
+  
+  <script>
+   
+     var fileButton = document.getElementById("fileButton");
+     var file;
+     fileButton.addEventListener('change', function(e){
+          file = e.target.files[0];
+     });
+     function myUpload()
+     {
+      var filename = Date.now();
+      var storageRef = firebase.storage().ref().child('FarmersItems/'+filename);
+      var db = firebase.firestore();
+      
+      storageRef.put(file).then(function(snapshot) {  
+        storageRef.getDownloadURL().then(function(url){
+          var docData = {
+        farmer: "Hello world!",  //jv
+        url: url.toString()
+        };
+        db.collection("FarmersItems").doc().set(docData).then(function(){
+        });
+      });
+      }); 
+     };
+  </script>
+</body>
+</html>
